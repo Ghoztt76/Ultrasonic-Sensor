@@ -1,3 +1,18 @@
+
+###########################################################################################
+# Name: Daniel, William, Bernard
+# Date: 11/29/2024
+# Description: This program asks the user for an input of a distance between 1 and 30cm
+# and creates a game that allows the user to determine intuitively how far the distance is.
+# The depending on the distance from the desired input, each LED will turn on and off
+# accordingly. If no number is entered, the game will choose a random distance between 1
+# and 30.
+##########################################################################################
+
+
+
+
+
 import RPi.GPIO as GPIO
 import time
 import random
@@ -53,19 +68,18 @@ def getDistance():
 
     return distance
 
-
 # if getDistance == +- 3 cm of user distance, light turns on 
 
 
-def Lights(dist):
+def Lights(dist = random.randint(0,30)):
     active = True
     target = dist
-
+    print("The distance chosen is: " + str(target) + " cm")
     
     while(active):
         actual = getDistance()
         '''
-        if(actual-target <= '''lower range'''  or actual-target>= '''upper range''')
+        if(actual-target <= lower range  or actual-target>= upper range)
             GPIO.output(RED1, GPIO.HIGH)
             GPIO.output(YELLOW1, GPIO.LOW)
             GPIO.output(RED2, GPIO.LOW)
@@ -73,7 +87,7 @@ def Lights(dist):
             GPIO.output(GREEN, GPIO.LOW)
         elif(actual-target<=)'''
         
-        if(actual-target <= (target+1)  or actual-target>= (target-1)) # GREEN
+        if(actual-target <= (target+1)  or actual-target>= (target-1)) # GREEN (FINISH GAME)
             GPIO.output(GREEN, GPIO.HIGH)
             GPIO.output(YELLOW1, GPIO.LOW)
             GPIO.output(RED2, GPIO.LOW)
@@ -87,53 +101,30 @@ def Lights(dist):
             GPIO.output(RED2, GPIO.LOW)
             GPIO.output(YELLOW2, GPIO.LOW)
             GPIO.output(GREEN, GPIO.LOW)
+            
         elif(actual-target <= (target-9)) # Red1
             GPIO.output(RED1, GPIO.HIGH)
             GPIO.output(YELLOW1, GPIO.LOW)
             GPIO.output(RED2, GPIO.LOW)
             GPIO.output(YELLOW2, GPIO.LOW)
             GPIO.output(GREEN, GPIO.LOW)
-        elif(actual-target <= '''lower range'''  or actual-target>= '''upper range''')# Yellow2
+            
+        elif(actual-target <= '''lower range'''  or actual-target>= '''upper range''')# Yellow2 / FARTHER OUT FROM SENSOR
             GPIO.output(RED1, GPIO.HIGH)
             GPIO.output(YELLOW1, GPIO.LOW)
             GPIO.output(RED2, GPIO.LOW)
             GPIO.output(YELLOW2, GPIO.LOW)
             GPIO.output(GREEN, GPIO.LOW)
-                if(actual-target <= '''lower range'''  or actual-target>= '''upper range''') # RED2
+            
+        elif(actual-target >= '''lower range'''  or actual-target>= '''upper range''') # RED2 / FARTHER OUT FROM SENSOR
             GPIO.output(RED1, GPIO.HIGH)
             GPIO.output(YELLOW1, GPIO.LOW)
             GPIO.output(RED2, GPIO.LOW)
             GPIO.output(YELLOW2, GPIO.LOW)
             GPIO.output(GREEN, GPIO.LOW) 
         
-        '''
-        if(getDistance() <= ((dist/5))):
-            GPIO.output(RED1, GPIO.HIGH)
-            GPIO.output(YELLOW1, GPIO.LOW)
-            GPIO.output(RED2, GPIO.LOW)
-            GPIO.output(YELLOW2, GPIO.LOW)
-            GPIO.output(GREEN, GPIO.LOW)
-        elif(getDistance() < ((dist/5)*2)):
-            GPIO.output(YELLOW1, GPIO.HIGH)
-            GPIO.output(RED1, GPIO.LOW)
-            GPIO.output(RED2, GPIO.LOW)
-            GPIO.output(YELLOW2, GPIO.LOW)
-            GPIO.output(GREEN, GPIO.LOW)
-        elif(getDistance() == dist): 
-            GPIO.output(GREEN, GPIO.HIGH)
-            GPIO.output(RED1, GPIO.LOW)
-            GPIO.output(RED2, GPIO.LOW)
-            GPIO.output(YELLOW2, GPIO.LOW)
-            GPIO.output(YELLOW1, GPIO.LOW)
-            
-        elif(getDistance() < ((dist/5)*3))
-              #yellow2
-        elif(getDistance() < ((dist/5)*4))
-            #red2
-    #1
-'''
 
-
+    print("Game Finished. ")
 
 
 
@@ -144,14 +135,7 @@ def main():
     active = True
     while(active == True):
         user_dist = int(input("Enter desired dist in cm (1-30): "))
-        
-        
-        
-        
-        
-        
-        
-    i = raw_input("--Get another measurement (Y/n)? ")
+    i = raw_input("Would you like to play again (Y/n)? ")
     # stop measuring if desired
     if (not i in [ "y", "Y", "yes", "Yes", "YES", "" ]):
         break
